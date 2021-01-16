@@ -1,5 +1,7 @@
 ## Test-Task-API
 
+### Go To http://localhost:3000/api-docs For Documetation.
+
 ### API List
  
 <b>1. SignUP : </b>
@@ -67,7 +69,7 @@
   </br>
  Example Body [JSON Format] :  </br>
  </br>
- <b>Note</b> : Value of <b>resetLink</b> will be Token You'll Recieve In Your Mail Address.
+ <!--<b>Note</b> : Value of <b>resetLink</b> will be Token You'll Recieve In Your Mail Address.-->
  
  ```json
 {

@@ -1,12 +1,31 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 
 //create express app
 const app = express();
 const PORT = 3000 || Process.ENV.PORT;
 
-app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
-app.use(bodyParser.json({ limit: '50mb', extended: true }))
+const swaggerOptions = {
+    swaggerDefinition: {
+        info: {
+            title: 'Signup, Login And Change Password API',
+            description: "Basic Signup, Login And Change Password REST APIs",
+            contact: {
+                name: "Dsquare"
+            },
+            servers: ["http://localhost:" + PORT]
+        }
+    },
+    apis:["./Routes/user.routes.js"]
+};
+
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use("/api-docs", swaggerUi.serve,swaggerUi.setup(swaggerDocs));
+
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json({ extended: true }))
 
 //configuring the database
 const dbConfig = require('./config/dbConfig.js');
