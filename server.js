@@ -32,6 +32,9 @@ app.get('/', (req, res) => {
     res.send("Welcome To Test API.");
 })
 
+
+require('./Routes/user.routes')(app);
+
 app.listen(PORT, () => {
     console.log("Server is listening on port : " + PORT);
 });
