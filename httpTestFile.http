@@ -6,7 +6,7 @@ POST http://localhost:3000/signup
 content-Type: application/json
 
 {
-    "email":"abc@abc.com",
+    "email":"darjidhaval19@gmail.com",
     "password":"123",
     "confirmPassword":"123"
 }
@@ -17,6 +17,25 @@ POST http://localhost:3000/login
 content-Type: application/json
 
 {
-    "email":"abc@abc.com",
-    "password":"123"
+    "email":"darjidhaval19@gmail.com",
+    "password":"abcxyz"
+}
+
+###
+
+PUT http://localhost:3000/forgot-password
+content-Type: application/json
+
+{
+    "email":"darjidhaval19@gmail.com"
+}
+
+###
+
+PUT http://localhost:3000/reset-password
+content-Type: application/json
+
+{
+    "newPass":"abcxyz",
+    "resetLink":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjMsImlhdCI6MTYxMDc4NDk1MSwiZXhwIjoxNjEwNzg2MTUxfQ.TucrRvlVU2bqhcCWBtZXN29mOv5DPr0aEGQlvVUS9Jc"
 }

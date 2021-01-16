@@ -4,7 +4,11 @@ const AutoIncrement = require('mongoose-sequence')(mongoose);
 const UserSchema = mongoose.Schema({
     id: Number,
     email: String,
-    password: String
+    password: String,
+    resetLink: {
+        data:String,
+        default:''
+    }
 }, {
     _id: false
 });

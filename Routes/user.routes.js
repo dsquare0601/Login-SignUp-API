@@ -4,4 +4,8 @@ module.exports = (app) => {
     app.post('/signup', users.signup);
 
     app.post('/login', users.login);
+
+    app.put('/forgot-password', users.forgotPassword);
+
+    app.put('/reset-password', users.resetPassword);
 }
