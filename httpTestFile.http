@@ -18,7 +18,7 @@ content-Type: application/json
 
 {
     "email":"darjidhaval19@gmail.com",
-    "password":"abcxyz"
+    "password":"dsquare"
 }
 
 ###
@@ -36,6 +36,6 @@ PUT http://localhost:3000/reset-password
 content-Type: application/json
 
 {
-    "newPass":"abcxyz",
-    "resetLink":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjMsImlhdCI6MTYxMDc4NDk1MSwiZXhwIjoxNjEwNzg2MTUxfQ.TucrRvlVU2bqhcCWBtZXN29mOv5DPr0aEGQlvVUS9Jc"
+    "newPass":"dsquare",
+    "resetLink":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjMsImlhdCI6MTYxMDgxMDQ2NywiZXhwIjoxNjEwODExNjY3fQ.7964NVjuMOUJqgOi3OBKZBDNLyd8gpA2jV9t4zRIJ30"
 }
