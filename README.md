@@ -69,7 +69,7 @@
   </br>
  Example Body [JSON Format] :  </br>
  </br>
- <!--<b>Note</b> : Value of <b>resetLink</b> will be Token You'll Recieve In Your Mail Address.-->
+ <b>Note</b> : Value of <b>resetLink</b> will be Token You'll Recieve In Forgot Password Response.
  
  ```json
 {
