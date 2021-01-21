@@ -1,4 +1,4 @@
-## Login-signUp-API
+## Login-SignUp-API
 
 #### It's a basic nodeJS API Project,And as a database - mongoDB is Used.
 
