@@ -77,7 +77,7 @@
  ```json
 {
     "newPass":"abcxyz",
-    "resetLink":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjMsImlhdCI6MTYxMDc4NDk1MSwiZXhwIjoxNjEwNzg2MTUxfQ.TucrRvlVU2bqhcCWBtZXN29mOv5DPr0aEGQlvVUS9Jc"
+    "resetLink":"token.value.you'll.recieve.in.response.of.forgotpassword"
 }
 ```
 </p>
