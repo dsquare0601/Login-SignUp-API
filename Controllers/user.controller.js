@@ -1,11 +1,11 @@
 const Users = require("../models/user.model");
 const log = require("../Logger");
-const { LocalURL, APIKey, DomainName } = require("../Config/dbConfig");
+const { LocalURL } = require("../Config/dbConfig");
 const jwt = require("jsonwebtoken");
 //const mailgun = require('mailgun-js');
 const _ = require("lodash");
 //const mg = mailgun({ apiKey: APIKey, domain: DomainName });
-//const SECRET = 'VkVSWV9TRUNSRVRfS0VZIQ==';
+const SECRET = "VkVSWV9TRUNSRVRfS0VZIQ==";
 
 exports.signup = async (req, res) => {
   const { email, password, confirmPassword } = req.body;
@@ -54,7 +54,7 @@ async function saveUser(users, cb) {
   var { req, res } = cb;
   console.log("Before save call");
 
-  try{
+  try {
     const data = await users.save();
     if (data) {
       log.info("User Added Successfully.");
@@ -64,7 +64,7 @@ async function saveUser(users, cb) {
       });
     }
     console.log(data);
-  } catch(err){
+  } catch (err) {
     log.error(err.message);
     res.status(500).send({
       success: false,
@@ -77,30 +77,35 @@ async function saveUser(users, cb) {
 exports.login = async (req, res) => {
   if (!(req.body.email || req.body.password)) {
     return res.status(400).send({
+      success: false,
       message: "Please Fill up Users Details",
     });
   }
 
-  Users.find({
-    $and: [{ email: req.body.email }, { password: req.body.password }],
-  })
-    .then((data) => {
-      if (data.length > 0) {
-        const user = {
-          email: data[0]["email"],
-        };
-
-        const token = jwt.sign(user, SECRET, { expiresIn: "24H" });
-        res.json({ token: token });
-      } else {
-        res.status(500).send({ message: "Data Not Found" });
-      }
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: err.message,
-      });
+  try {
+    const data = await Users.find({
+      $and: [{ email: req.body.email }, { password: req.body.password }],
     });
+
+    if (data.length > 0) {
+      const user = {
+        email: data[0]["email"],
+      };
+
+      const token = jwt.sign(user, SECRET, { expiresIn: "24H" });
+      log.info("User found for login");
+      res.json({ success: true, token: token });
+    } else {
+      log.info("Data not found for login");
+      res.status(500).send({ success: true, message: "Data Not Found" });
+    }
+  } catch (err) {
+    log.error(err.message);
+    res.status(500).send({
+      success: false,
+      message: err.message,
+    });
+  }
 };
 
 exports.forgotPassword = (req, res) => {
