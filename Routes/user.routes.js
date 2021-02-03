@@ -1,5 +1,5 @@
 module.exports = (app) => {
-    const users = require('../controllers/user.controller');
+    const users = require('../Controllers/user.controller');
 
     /**
      * @swagger
