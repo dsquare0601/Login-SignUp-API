@@ -90,19 +90,18 @@ exports.GetEmployee = async (req, res) => {
       .limit(limit * 1)
       .skip((page - 1) * limit); */
 
-    const count = await Employee.find(filter).countDocuments();
+    //const count = await Employee.find(filter).countDocuments();
 
     if (!data || data.length === 0) throw new Error("Employee not found!");
 
     return res.status(200).json({
       success: true,
       totalRecords: data[0].metadata[0] ? data[0].metadata[0].total : 0,
-      totalPages: Math.ceil(count / limit),
-      currentPage: page,
-      data: data[0].data,
       totalPages: data[0].metadata[0]
         ? Math.ceil(data[0].metadata[0].total / limit)
         : 0,
+      currentPage: page,
+      data: data[0].data,
     });
   } catch (err) {
     return res.status(400).send({
