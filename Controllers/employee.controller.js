@@ -58,6 +58,9 @@ exports.GetEmployee = async (req, res) => {
   let { page, limit } = req.query;
 
   limit = limit ? limit : 5;
+  if (page <= 0) {
+    return res.status(400).send({ Success: false, message: "Page can't be zero or negative" });
+  }
   page = page ? page : 1;
 
   const filter = {
@@ -108,7 +111,6 @@ exports.GetEmployee = async (req, res) => {
     });
   }
 };
-
 
 //Work Only With Two Query : limit, page
 exports.Pagination = async (req, res) => {
