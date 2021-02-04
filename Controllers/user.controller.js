@@ -93,7 +93,7 @@ exports.login = async (req, res) => {
       };
 
       const token = jwt.sign(user, SECRET, { expiresIn: "24H" });
-      log.info("User found for login");
+      log.info("Token returned for user login");
       res.json({ success: true, token: token });
     } else {
       log.info("Data not found for login");
@@ -134,21 +134,20 @@ exports.forgotPassword = (req, res) => {
       if (err) {
         return res.status(400).send("Reset Password Link Error.!");
       } else {
-        return res
-          .status(200)
-          .send(
-            "Copy the Below Token String For Use In Reset Password API\n" +
-              token
-          );
+        return res.status(200).send({
+          message:
+            "Copy the Below Token String For Use In Reset Password API\n",
+          token: token,
+        });
         //Sending In Email
         /*
-                mg.messages().send(mailOptions, function(err, body){
-                    if(err) {
-                        return res.send(err.message);
-                    }
-                    return res.status(200).send("Email has bee sent, kindly check in spam folder.!")
-                });
-                */
+        mg.messages().send(mailOptions, function(err, body){
+            if(err) {
+                return res.send(err.message);
+            }
+            return res.status(200).send("Email has bee sent, kindly check in spam folder.!")
+        });
+        */
       }
     });
   });

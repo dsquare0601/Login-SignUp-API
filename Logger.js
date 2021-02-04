@@ -1,8 +1,8 @@
 const winston = require("winston");
 var today = new Date();
 var date =
-  today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
-// console.log(mydate);
+  today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getFullYear();
+
 const logger = winston.createLogger({
   level: "info",
   format: winston.format.json(),
