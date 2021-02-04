@@ -54,13 +54,11 @@ async function checkForEmpId(id) {
 
 exports.GetEmployee = async (req, res) => {
   const cb = { req, res };
-  const params = req.query;
+  const { EmpId, Name, Designation, Department, Salary } = req.query;
   let { page, limit } = req.query;
 
   limit = limit ? limit : 5;
   page = page ? page : 1;
-
-  const { EmpId, Name, Designation, Department, Salary } = params;
 
   const filter = {
     $or: [
@@ -111,6 +109,8 @@ exports.GetEmployee = async (req, res) => {
   }
 };
 
+
+//Work Only With Two Query : limit, page
 exports.Pagination = async (req, res) => {
   let { page, limit } = req.query;
 
