@@ -112,7 +112,10 @@ exports.forgotPassword = (req, res) => {
 
   Users.findOne({ email: email }, (err, data) => {
     if (err || !data) {
-      return res.status(400).send("User Not found with this email");
+      return res.status(400).send({
+        success: false,
+        message: "User Not found with this email",
+      });
     }
 
     const token = jwt.sign({ _id: data._id }, SECRET, { expiresIn: "20m" });
@@ -131,11 +134,14 @@ exports.forgotPassword = (req, res) => {
 
     return data.updateOne({ resetLink: token }, (err, success) => {
       if (err) {
-        return res.status(400).send("Reset Password Link Error.!");
+        return res.status(400).send({
+          success: false,
+          message: err.message,
+        });
       } else {
         return res.status(200).send({
           message:
-            "Copy the Below Token String For Use In Reset Password API\n",
+            "Copy the Below Token String For Use In Reset Password API",
           token: token,
         });
         //Sending In Email
@@ -166,12 +172,18 @@ exports.resetPassword = (req, res) => {
   try {
     jwt.verify(resetLink, SECRET, function (err, data) {
       if (err) {
-        return res.send("Incorrect Token or It Is Expired.");
+        return res.send({
+          success: false,
+          message: "Incorrect Token or It Is Expired.",
+        });
       }
 
       Users.findOne({ resetLink }, (err, data) => {
         if (err || !data) {
-          return res.status(400).send("User with this token does not exist.");
+          return res.status(400).send({
+            success: false,
+            message: "User with this token does not exist.",
+          });
         }
 
         const pass = {
