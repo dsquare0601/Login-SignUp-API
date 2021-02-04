@@ -29,7 +29,7 @@ exports.signup = async (req, res) => {
 
   try {
     const data = await Users.find({ email: email });
-    
+
     if (data.length > 0) {
       res.status(200).json({
         success: false,
@@ -155,7 +155,15 @@ exports.forgotPassword = (req, res) => {
 exports.resetPassword = (req, res) => {
   const { resetLink, newPass } = req.body;
 
-  if (resetLink) {
+  if (!newPass || !resetLink) {
+    return res.send({
+      success: false,
+      message:
+        "New password and reset link-token must needed for reseting password.",
+    });
+  }
+
+  try {
     jwt.verify(resetLink, SECRET, function (err, data) {
       if (err) {
         return res.send("Incorrect Token or It Is Expired.");
@@ -173,14 +181,23 @@ exports.resetPassword = (req, res) => {
         data = _.extend(data, pass);
         data.save((err, data) => {
           if (err) {
-            return res.status(400).send("Reset Password Error");
+            return res.status(400).send({
+              success: false,
+              message: err.message,
+            });
           } else {
-            return res.status(200).send("Your Password has been sent!");
+            return res.status(200).send({
+              success: false,
+              message: "Your Password has been updated successfully!",
+            });
           }
         });
       });
     });
-  } else {
-    return res.status(400).send("Error Occured!!!");
+  } catch (err) {
+    return res.status(400).send({
+      success: false,
+      message: err.message,
+    });
   }
 };
