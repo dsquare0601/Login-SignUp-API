@@ -42,7 +42,7 @@ exports.signup = async (req, res) => {
       console.log("After call");
     }
   } catch (err) {
-    res.status(500).send({
+    res.status(400).send({
       success: false,
       message: err.message,
     });
@@ -65,7 +65,7 @@ async function saveUser(users, cb) {
     console.log(data);
   } catch (err) {
     log.error(err.message);
-    res.status(500).send({
+    res.status(400).send({
       success: false,
       message: err.message,
     });
@@ -96,11 +96,11 @@ exports.login = async (req, res) => {
       res.json({ success: true, token: token });
     } else {
       log.info("Data not found for login");
-      res.status(500).send({ success: true, message: "Data Not Found" });
+      res.status(400).send({ success: true, message: "Data Not Found" });
     }
   } catch (err) {
     log.error(err.message);
-    res.status(500).send({
+    res.status(400).send({
       success: false,
       message: err.message,
     });
