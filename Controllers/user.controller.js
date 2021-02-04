@@ -121,7 +121,6 @@ exports.forgotPassword = (req, res) => {
       to: email,
       subject: "Forgot Password Link",
       html: `
-                <h2>Please click below link to reset your password.</h2>
                 <h4>Use the token string which is placed after '.../resetPassword/'.</h4>
                 <p>${LocalURL}/resetPassword/${token}</p>
             `,
