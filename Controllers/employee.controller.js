@@ -47,10 +47,8 @@ exports.addEmployee = async (req, res) => {
 async function checkForEmpId(id) {
   const data = await Employee.find({ EmpId: id });
 
-  console.log(data);
   if (data || data.length > 0)
     throw new Error("Employee already exist with this EmpId!");
-  console.log("after err");
   return data;
 }
 
@@ -96,9 +94,6 @@ exports.GetEmployee = async (req, res) => {
 
     if (!data || data.length === 0) throw new Error("Employee not found!");
 
-    console.log(data);
-    console.log(data[0].metadata[0]);
-
     return res.status(200).json({
       success: true,
       totalRecords: data[0].metadata[0] ? data[0].metadata[0].total : 0,
@@ -110,7 +105,6 @@ exports.GetEmployee = async (req, res) => {
         : 0,
     });
   } catch (err) {
-    console.log(err);
     return res.status(400).send({
       success: false,
       message: err.message,
