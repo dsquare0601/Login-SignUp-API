@@ -10,7 +10,7 @@ const SECRET = "VkVSWV9TRUNSRVRfS0VZIQ==";
 exports.signup = async (req, res) => {
   const { email, password, confirmPassword } = req.body;
 
-  if (!(email || password)) {
+  if (!email || !password || !confirmPassword) {
     return res.status(400).send({
       success: false,
       message: "Please Fill Up Users Details!",
@@ -29,8 +29,7 @@ exports.signup = async (req, res) => {
 
   try {
     const data = await Users.find({ email: email });
-    console.log(data);
-
+    
     if (data.length > 0) {
       res.status(200).json({
         success: false,
