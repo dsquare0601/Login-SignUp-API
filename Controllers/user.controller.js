@@ -36,10 +36,8 @@ exports.signup = async (req, res) => {
         message: "User Already Exist.",
       });
     } else {
-      console.log("Before call");
       var cb = { req, res };
       await saveUser(users, cb);
-      console.log("After call");
     }
   } catch (err) {
     res.status(400).send({
@@ -51,8 +49,7 @@ exports.signup = async (req, res) => {
 
 async function saveUser(users, cb) {
   var { req, res } = cb;
-  console.log("Before save call");
-
+  
   try {
     const data = await users.save();
     if (data) {
@@ -62,7 +59,6 @@ async function saveUser(users, cb) {
         data: data,
       });
     }
-    console.log(data);
   } catch (err) {
     log.error(err.message);
     res.status(400).send({
@@ -70,7 +66,6 @@ async function saveUser(users, cb) {
       message: err.message,
     });
   }
-  console.log("After save call");
 }
 
 exports.login = async (req, res) => {
