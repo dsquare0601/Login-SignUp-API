@@ -49,7 +49,7 @@ exports.signup = async (req, res) => {
 
 async function saveUser(users, cb) {
   var { req, res } = cb;
-  
+
   try {
     const data = await users.save();
     if (data) {
@@ -121,8 +121,8 @@ exports.forgotPassword = (req, res) => {
       to: email,
       subject: "Forgot Password Link",
       html: `
-                <h4>Use the token string which is placed after '.../resetPassword/'.</h4>
-                <p>${LocalURL}/resetPassword/${token}</p>
+      <h4>Use the token string which is placed after '.../resetPassword/'.</h4>
+      <p>${LocalURL}/resetPassword/${token}</p>
             `,
     };
 
@@ -134,8 +134,7 @@ exports.forgotPassword = (req, res) => {
         });
       } else {
         return res.status(200).send({
-          message:
-            "Copy the Below Token String For Use In Reset Password API",
+          message: "Copy the Below Token String For Use In Reset Password API",
           token: token,
         });
         //Sending In Email
