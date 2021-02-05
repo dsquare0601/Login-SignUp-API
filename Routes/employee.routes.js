@@ -1,4 +1,5 @@
 import { routesLink } from "../enum/index";
+const AuthGuard = require("../Authentication/authentication");
 const Route = routesLink.EmpRoutes;
 
 module.exports = (app) => {
@@ -8,9 +9,9 @@ module.exports = (app) => {
 
   app.post(Route.Login, Employee.login);
 
-  app.get(Route.GetAllEmp, Employee.GetAllEmployees);
+  app.get(Route.GetAllEmp, AuthGuard, Employee.GetAllEmployees);
 
-  app.get(Route.GetEmpWithCondition, Employee.GetEmployee);
+  app.get(Route.GetEmpWithCondition, AuthGuard, Employee.GetEmployee);
 
-  app.get(Route.GetByPageLimit, Employee.Pagination);
+  app.get(Route.GetByPageLimit, AuthGuard, Employee.Pagination);
 };

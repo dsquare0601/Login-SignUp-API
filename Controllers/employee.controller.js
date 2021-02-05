@@ -9,7 +9,7 @@ const jwt = require("jsonwebtoken");
 const _ = require("lodash");
 const SECRET = "VkVSWV9TRUNSRVRfS0VZIQ==";
 
-exports.addEmployee = async (req, res) => {
+exports.addEmployee = async (req, res, next) => {
   /*  if (!EmpId || !Name || !Designation || !Department || !Salary)
     return res.status(400).json({
       success: false,
@@ -127,30 +127,16 @@ exports.login = async (req, res) => {
 };
 
 exports.GetAllEmployees = async (req, res) => {
-  const { authorization } = req.headers;
-
   try {
-    if (authorization) {
-      const token = authorization.split(" ")[1];
-      if (token == undefined || token == null)
-        throw new Error("Invalid Authorization Token");
-        
-      await jwt.verify(token, SECRET);
+    const data = await Employee.find();
 
-      const data = await Employee.find();
+    if (!data || data.length === 0) throw new Error("Employee not found!");
+    console.log("exit from api add");
 
-      if (!data || data.length === 0) throw new Error("Employee not found!");
-
-      return res.status(200).json({
-        success: true,
-        data: data,
-      });
-    } else {
-      return res.status(400).send({
-        success: false,
-        message: "Invalid Authorization Token",
-      });
-    }
+    return res.status(200).json({
+      success: true,
+      data: data,
+    });
   } catch (err) {
     return res.status(400).send({
       success: false,
@@ -160,12 +146,11 @@ exports.GetAllEmployees = async (req, res) => {
 };
 
 exports.GetEmployee = async (req, res) => {
-  const cb = { req, res };
   const { EmpId, Name, Designation, Department, Salary } = req.query;
   let { page, limit } = req.query;
-  const { authorization } = req.headers;
-
+  
   limit = limit ? limit : 5;
+  
   if (page <= 0) {
     return res
       .status(400)
@@ -183,12 +168,6 @@ exports.GetEmployee = async (req, res) => {
     ],
   };
   try {
-    if (authorization) {
-      const token = authorization.split(" ")[1];
-      if (token == undefined || token == null)
-        throw new Error("Invalid Authorization Token");
-      await jwt.verify(token, SECRET);
-
       const data = await Employee.aggregate([
         {
           $match: filter,
@@ -220,12 +199,6 @@ exports.GetEmployee = async (req, res) => {
         currentPage: page,
         data: data[0].data,
       });
-    } else {
-      return res.status(400).send({
-        success: false,
-        message: "Invalid Authorization Token",
-      });
-    }
   } catch (err) {
     return res.status(400).send({
       success: false,
