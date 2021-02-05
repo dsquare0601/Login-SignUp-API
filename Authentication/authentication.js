@@ -19,7 +19,7 @@ const AuthGuard = async (req, res, next) => {
       });
     }
   } catch (err) {
-    //redirect to login
+    //redirect to login\
     return res.status(401).send({
       success: false,
       message: err.message,
