@@ -1,6 +1,6 @@
 const Users = require("../models/user.model");
 const log = require("../Logger");
-const { LocalURL } = require("../Config/dbConfig");
+const { BaseURL } = require("../Config/dbConfig");
 const jwt = require("jsonwebtoken");
 //const mailgun = require('mailgun-js');
 const _ = require("lodash");
@@ -122,7 +122,7 @@ exports.forgotPassword = (req, res) => {
       subject: "Forgot Password Link",
       html: `
       <h4>Use the token string which is placed after '.../resetPassword/'.</h4>
-      <p>${LocalURL}/resetPassword/${token}</p>
+      <p>${BaseURL}/resetPassword/${token}</p>
             `,
     };
 

@@ -3,7 +3,9 @@ const mongoose = require('mongoose');
 const EmployeeSchema = mongoose.Schema({
     EmpId: Number, 
     Name: String,
+    Email: String,
     Designation: String,
+    Password: String,
     Department: String,
     Salary: Number
 }, {

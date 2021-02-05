@@ -1,11 +1,11 @@
-const express = require("express");
+import express from 'express';
 const bodyParser = require("body-parser");
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 
 //create express app
 const app = express();
-const PORT = 3000 || Process.ENV.PORT;
+const PORT = 3000 || process.env.PORT;
 
 const swaggerOptions = {
   swaggerDefinition: {
