@@ -12,13 +12,13 @@ const AuthGuard = async (req, res, next) => {
       await jwt.verify(token, SECRET);
       next();
     } else {
-      return res.status(400).send({
+      return res.status(401).send({
         success: false,
-        message: "Invalid Authorization Token",
+        message: "Unauthorized Access or Invalid Authorization Token",
       });
     }
   } catch (err) {
-    return res.status(400).send({
+    return res.status(401).send({
       success: false,
       message: err.message,
     });
