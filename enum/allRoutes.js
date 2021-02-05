@@ -1,3 +1,5 @@
+import { resetPassword } from "../Controllers/user.controller";
+
 export default {
   EmpRoutes: {
     AddEmp: "/addemp",
@@ -6,5 +8,10 @@ export default {
     GetAllEmp: "/getallemp",
     GetByPageLimit: "/pagination",
   },
-  User: {},
+  User: {
+    SignUp:'/signup',
+    Login:'/login',
+    ForgotPassword:'/forgot-password',
+    ResetPassword:'/reset-password',
+  },
 };

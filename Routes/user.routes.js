@@ -1,3 +1,6 @@
+import { routesLink } from "../enum/index";
+const Route = routesLink.User;
+
 module.exports = (app) => {
     const users = require('../Controllers/user.controller');
 
@@ -7,7 +10,7 @@ module.exports = (app) => {
      *  post:
      *      description: Use To Create Account
      */
-    app.post('/signup', users.signup);
+    app.post(Route.SignUp, users.signup);
 
     /**
      * @swagger
@@ -15,7 +18,7 @@ module.exports = (app) => {
      *  post:
      *      description: Use To Login Into Account
      */
-    app.post('/login', users.login);
+    app.post(Route.Login, users.login);
 
     /**
      * @swagger
@@ -23,7 +26,7 @@ module.exports = (app) => {
      *  put:
      *      description: Use To Get Special Generated Token To Use Into Reset Password API's Body.
      */
-    app.put('/forgot-password', users.forgotPassword);
+    app.put(Route.ForgotPassword, users.forgotPassword);
 
     /**
      * @swagger
@@ -31,5 +34,5 @@ module.exports = (app) => {
      *  put:
      *      description: Use To Reset Password.
      */
-    app.put('/reset-password', users.resetPassword);
+    app.put(Route.ResetPassword, users.resetPassword);
 }
