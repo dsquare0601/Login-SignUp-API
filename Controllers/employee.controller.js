@@ -82,7 +82,7 @@ async function checkForEmail(email) {
   return data;
 }
 
-exports.login = async (req, res) => {
+exports.login = async (req, res, next) => {
   const { Email, Password } = req.body;
 
   /* 
@@ -126,7 +126,7 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.GetAllEmployees = async (req, res) => {
+exports.GetAllEmployees = async (req, res, next) => {
   try {
     const data = await Employee.find();
 
@@ -145,12 +145,12 @@ exports.GetAllEmployees = async (req, res) => {
   }
 };
 
-exports.GetEmployee = async (req, res) => {
+exports.GetEmployee = async (req, res, next) => {
   const { EmpId, Name, Designation, Department, Salary } = req.query;
   let { page, limit } = req.query;
   
   limit = limit ? limit : 5;
-  
+
   if (page <= 0) {
     return res
       .status(400)
@@ -208,7 +208,7 @@ exports.GetEmployee = async (req, res) => {
 };
 
 //Work Only With Two Query : limit, page
-exports.Pagination = async (req, res) => {
+exports.Pagination = async (req, res, next) => {
   let { page, limit } = req.query;
 
   limit = limit ? limit : 5;
