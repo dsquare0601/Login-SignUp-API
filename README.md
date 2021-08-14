@@ -18,7 +18,7 @@
  
  ```json
  {
-    "email":"darjidhaval19@gmail.com",
+    "email":"email@gmail.com",
     "password":"123",
     "confirmPassword":"123"
 }
@@ -37,7 +37,7 @@
  
  ```json
 {
-    "email":"darjidhaval19@gmail.com",
+    "email":"email@gmail.com",
     "password":"abcxyz"
 }
 ```
@@ -56,7 +56,7 @@
  
  ```json
 {
-    "email":"darjidhaval19@gmail.com"
+    "email":"email@gmail.com"
 }
 ```
 </p>
